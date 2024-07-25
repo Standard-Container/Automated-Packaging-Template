@@ -43,10 +43,11 @@ jobs:
          outputs: type=docker,dest=${{ github.event.repository.name }}-${{ matrix.arch }}.tar
          context: .
          file: ./Dockerfile
-         tags: ${{ env.repository_name }}:${{ github.ref_name }}-${{ matrix.arch }}
+         tags: ${{ env.repository_name }}:${{ github.ref_name }}
 
       - name: Compress Docker image
         run: |
+          docker rmi ${{ env.repository_name }}:${{ github.ref_name }}
           gzip ${{ github.event.repository.name }}-${{ matrix.arch }}.tar
           ls -lh ${{ github.event.repository.name }}-${{ matrix.arch }}.tar.gz
 

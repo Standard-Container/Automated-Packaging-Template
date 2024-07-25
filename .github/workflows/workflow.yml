@@ -47,7 +47,6 @@ jobs:
 
       - name: Compress Docker image
         run: |
-          docker rmi ${{ env.repository_name }}:${{ github.ref_name }}
           gzip ${{ github.event.repository.name }}-${{ matrix.arch }}.tar
           ls -lh ${{ github.event.repository.name }}-${{ matrix.arch }}.tar.gz
 
